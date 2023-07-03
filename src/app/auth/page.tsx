@@ -1,3 +1,4 @@
+import { AuthSubmit } from '@components'
 import style from '@styles/auth.module.css'
 
 interface PageProps {
@@ -12,12 +13,21 @@ const AuthenticationPage: React.FC<PageProps> = (props) => {
   return (
     <form className={style.auth}>
       <h1>{page}</h1>
-      <input type="text" name="username" placeholder="Username" />
-      <input type="password" name="password" placeholder="Password" />
-      <button>{page}</button>
+      {fields.map((f) => (
+        <input
+          key={f}
+          type={f === 'Password' ? 'password' : 'text'}
+          name={f.toLowerCase()}
+          placeholder={f}
+          required
+        />
+      ))}
+      <AuthSubmit />
     </form>
   )
 }
+
+const fields = ['Name', 'Password']
 
 export const dynamic = 'force-dynamic'
 

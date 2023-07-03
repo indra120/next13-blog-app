@@ -10,7 +10,9 @@ const Header = async () => {
 
   return (
     <header className={style.header}>
-      <Link href="/" className={style.logo}>MyBlog</Link>
+      <Link href="/" className={style.logo}>
+        MyBlog
+      </Link>
 
       <nav className={style.nav}>
         {session ? (
