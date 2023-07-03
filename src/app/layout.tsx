@@ -1,5 +1,7 @@
-import { Layout } from '@types'
 import { Roboto } from 'next/font/google'
+import { Header, SessionProvider } from '@components'
+import type { Layout } from '@types'
+import './global.css'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -13,7 +15,12 @@ export const metadata = {
 
 const RootLayout: Layout = ({ children }) => (
   <html lang="en">
-    <body className={roboto.className}>{children}</body>
+    <body className={roboto.className}>
+      <SessionProvider>
+        <Header />
+        {children}
+      </SessionProvider>
+    </body>
   </html>
 )
 
