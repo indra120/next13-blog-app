@@ -20,8 +20,8 @@ const Header = async () => {
           </>
         ) : (
           <>
-            <Link href="/login">Login</Link>
-            <Link href="/register">Register</Link>
+            <Link href="/auth?mode=login">Login</Link>
+            <Link href="/auth?mode=register">Register</Link>
           </>
         )}
       </nav>
