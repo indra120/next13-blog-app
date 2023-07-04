@@ -11,6 +11,10 @@
   color: inherit;
 }
 
+.header span {
+  cursor: pointer;
+}
+
 .logo {
   font-weight: bold;
   font-size: 1.5rem;

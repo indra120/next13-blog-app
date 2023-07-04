@@ -6,7 +6,7 @@ const CreatePostPage = () => {
       <input type="text" name="title" placeholder="Title" required />
       <input type="text" name="summary" placeholder="Summary" required />
       <input type="file" name="cover" required />
-      <Editor />
+      <Editor mode="create" />
     </form>
   )
 }

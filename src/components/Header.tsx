@@ -1,12 +1,13 @@
 import { getServerSession } from 'next-auth'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { authOptions } from '@lib'
 import style from '@styles/header.module.css'
 
 const Logout = dynamic(() => import('./Logout'))
 
 const Header = async () => {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
 
   return (
     <header className={style.header}>

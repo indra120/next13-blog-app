@@ -7,7 +7,7 @@ interface PageProps {
   }
 }
 
-const AuthenticationPage: React.FC<PageProps> = async (props) => {
+const AuthenticationPage: React.FC<PageProps> = (props) => {
   const page = props?.searchParams?.mode === 'login' ? 'Login' : 'Register'
 
   return (
@@ -22,7 +22,7 @@ const AuthenticationPage: React.FC<PageProps> = async (props) => {
           required
         />
       ))}
-      <AuthSubmit />
+      <AuthSubmit page={page} />
     </form>
   )
 }

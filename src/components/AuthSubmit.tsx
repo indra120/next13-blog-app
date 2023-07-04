@@ -4,31 +4,30 @@ import { signIn } from 'next-auth/react'
 import { useSearchParams }from 'next/navigation'
 import { register } from '@app/actions'
 
-const AuthSubmit = () => {
-  const params = useSearchParams()
+interface Props{
+  page: 'Login' | 'Register'
+}
+
+const AuthSubmit:React.FC<Props> = (props) => {
+  // const params = useSearchParams()
 
   return (
     <button
       type="submit"
       formAction={async (data) => {
-        try {
-          if (params.get('mode') === 'register') {
-            await register(data)
-          }
-
-          await signIn('credentials', {
-            name: data.get('name'),
-            password: data.get('password'),
-            redirect: true,
-            callbackUrl: '/'
-          })
-        } catch (error) {
-          // @ts-ignore
-          throw Error(`Failed to ${params.get('mode')}: ${error?.message}`)
+        if (props.page === 'Register') {
+          await register(data)
         }
+
+        await signIn('credentials', {
+          name: data.get('name'),
+          password: data.get('password'),
+          redirect: true,
+          callbackUrl: '/'
+        })
       }}
     >
-      {params.get('mode') === 'register'? 'Register' : 'Login'}
+      {props.page}
     </button>
   )
 }

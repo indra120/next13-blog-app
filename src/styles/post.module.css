@@ -1,0 +1,65 @@
+.image {
+  max-height: 300px;
+  display: flex;
+  overflow: hidden;
+}
+
+.image img {
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+}
+
+.postDetail a {
+  color: #333;
+  text-decoration: underline;
+}
+
+.title {
+  text-align: center;
+  margin: 10px 0 5px;
+}
+
+.time {
+  text-align: center;
+  display: block;
+  font-size: 1rem;
+  color: #aaa;
+  margin: 10px 0;
+}
+
+.author {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.content p {
+  line-height: 1.7rem;
+  margin: 30px 0;
+}
+
+.content li {
+  margin-bottom: 10px;
+}
+
+.edit {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.editBtn {
+  background-color: #333;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff !important;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.editBtn svg {
+  height: 20px;
+}
