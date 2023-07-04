@@ -12,17 +12,18 @@ datasource db {
 
 model User {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
-  name String @unique
+  name     String @unique
   password String
   posts    Post[]
 }
 
 model Post {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  title    String
-  summary  String
-  content  String
-  cover    String
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId String @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  summary    String
+  content    String
+  cover      String
+  createdAt  DateTime @default(now())
+  author     User     @relation(fields: [authorName], references: [name], onDelete: Cascade)
+  authorName String
 }

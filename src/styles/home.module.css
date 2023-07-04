@@ -1,0 +1,40 @@
+.post {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 700px) {
+  .post {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+}
+
+.texts h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.texts a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.info {
+  margin: 24px 0;
+  color: #888;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  gap: 10px;
+}
+
+.author {
+  color: #333;
+}
+
+.summary {
+  margin: 10px 0;
+  line-height: 1.8rem;
+}

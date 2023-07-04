@@ -6,3 +6,7 @@
 .auth h1 {
   text-align: center;
 }
+
+.auth span {
+  cursor: pointer;
+}

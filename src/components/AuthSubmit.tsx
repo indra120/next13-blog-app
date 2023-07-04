@@ -20,6 +20,7 @@ const AuthSubmit = () => {
             name: data.get('name'),
             password: data.get('password'),
             redirect: true,
+            callbackUrl: '/'
           })
         } catch (error) {
           // @ts-ignore

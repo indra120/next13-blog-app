@@ -7,7 +7,7 @@ interface PageProps {
   }
 }
 
-const AuthenticationPage: React.FC<PageProps> = (props) => {
+const AuthenticationPage: React.FC<PageProps> = async (props) => {
   const page = props?.searchParams?.mode === 'login' ? 'Login' : 'Register'
 
   return (
