@@ -1,13 +1,10 @@
-import { getServerSession } from 'next-auth'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { authOptions } from '@lib'
+import Logout from './Logout'
+import { getSession } from '@lib'
 import style from '@styles/header.module.css'
 
-const Logout = dynamic(() => import('./Logout'))
-
 const Header = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await getSession()
 
   return (
     <header className={style.header}>
@@ -23,8 +20,8 @@ const Header = async () => {
           </>
         ) : (
           <>
-            <Link href="/auth?mode=login">Login</Link>
-            <Link href="/auth?mode=register">Register</Link>
+            <Link href="/login">Login</Link>
+            <Link href="/register">Register</Link>
           </>
         )}
       </nav>

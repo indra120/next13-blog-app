@@ -12,7 +12,7 @@ const HomePage = async () => {
         <div key={post.id} className={style.post}>
           <div className={style.image}>
             <Link href={`/post/${post.id}`}>
-              <img src={`/images/${post.cover}`} alt="" />
+              <img src={post.cover} alt="" />
             </Link>
           </div>
 

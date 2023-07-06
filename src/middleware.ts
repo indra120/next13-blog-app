@@ -2,10 +2,10 @@ import { withAuth } from 'next-auth/middleware'
 
 export default withAuth({
   pages: {
-    signIn: '/auth?mode=login',
+    signIn: '/login',
   },
 })
 
 export const config = {
-  matcher: ['/post/create', '/post/[id]/edit'],
+  matcher: ['/post/create', '/post/:id/edit'],
 }

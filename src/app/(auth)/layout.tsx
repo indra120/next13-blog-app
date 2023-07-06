@@ -1,11 +1,10 @@
-import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
-import { authOptions } from '@lib'
+import { getSession } from '@lib'
 import type { Layout } from '@types'
 
 const AuthLayout: Layout = async (props) => {
-  const session = await getServerSession(authOptions)
-  if (session?.user?.name) redirect('/')
+  const session = await getSession()
+  if (session) redirect('/')
 
   return <>{props.children}</>
 }

@@ -2,8 +2,10 @@
 
 import { useMemo, useRef } from 'react'
 import { experimental_useFormStatus as useFormStatus } from 'react-dom'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import ReactQuill from 'react-quill'
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
+import { storage } from '@firebase/config'
 import { createNewPost, updatePost } from '@app/actions'
 import 'react-quill/dist/quill.snow.css'
 
@@ -17,6 +19,7 @@ const Editor: React.FC<Props> = (props) => {
   const createMode = useMemo(() => props.mode === 'create', [props.mode])
   const params = useParams()
   const { pending } = useFormStatus()
+  const router = useRouter()
 
   return (
     <>
@@ -25,19 +28,47 @@ const Editor: React.FC<Props> = (props) => {
         defaultValue={!createMode ? props.defaultValues : ''}
         theme="snow"
         modules={modules}
+        style={{ height: '300px' }}
       />
 
       <button
         type="submit"
-        style={{ marginTop: '5px' }}
+        style={{ marginTop: '45px' }}
         disabled={pending}
         formAction={async (data) => {
           data.append('content', content.current?.value as string)
-          if (createMode) {
-            await createNewPost(data)
-          } else {
+
+          if (data.get('cover') === null) {
+            data.delete('cover')
             data.append('id', params.id as string)
+
             await updatePost(data)
+            router.push(`/post/${params.id}`)
+          } else {
+            const file = data.get('cover') as File
+            const storageRef = ref(
+              storage,
+              `images/${Date.now()}.${file.type.split('/')[1]}`
+            )
+            const uploadTask = uploadBytesResumable(storageRef, file)
+
+            uploadTask.on(
+              'state_changed',
+              () => {},
+              console.error,
+              async () => {
+                data.set('cover', await getDownloadURL(uploadTask.snapshot.ref))
+
+                if (createMode) {
+                  await createNewPost(data)
+                  router.push('/')
+                } else {
+                  data.append('id', params.id as string)
+                  await updatePost(data)
+                  router.push(`/post/${params.id}`)
+                }
+              }
+            )
           }
         }}
       >

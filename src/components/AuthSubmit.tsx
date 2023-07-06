@@ -1,33 +1,29 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import { useSearchParams }from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { register } from '@app/actions'
 
-interface Props{
-  page: 'Login' | 'Register'
-}
-
-const AuthSubmit:React.FC<Props> = (props) => {
-  // const params = useSearchParams()
+const AuthSubmit = () => {
+  const params = useSearchParams()
+  const pathname=usePathname()
 
   return (
     <button
       type="submit"
       formAction={async (data) => {
-        if (props.page === 'Register') {
+        if (pathname === 'register') {
           await register(data)
         }
 
         await signIn('credentials', {
           name: data.get('name'),
           password: data.get('password'),
-          redirect: true,
-          callbackUrl: '/'
+          callbackUrl: params.get('callbackUrl') || undefined,
         })
       }}
     >
-      {props.page}
+      {pathname === 'register'? 'Register' : 'Login'}
     </button>
   )
 }

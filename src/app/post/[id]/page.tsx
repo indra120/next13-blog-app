@@ -1,8 +1,7 @@
 import { formatISO9075 } from 'date-fns'
-import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import { getPost } from '@app/dataFetching'
-import { authOptions } from '@lib'
+import { getSession } from '@lib'
 import style from '@styles/post.module.css'
 
 export interface PageProps {
@@ -14,7 +13,7 @@ export interface PageProps {
 const PostDetailPage: React.FC<PageProps> = async (props) => {
   const [post, session] = await Promise.all([
     getPost(props.params.id),
-    getServerSession(authOptions),
+    getSession(),
   ])
 
   return (
@@ -37,7 +36,7 @@ const PostDetailPage: React.FC<PageProps> = async (props) => {
       )}
 
       <div className={style.image}>
-        <img src={`/images/${post?.cover}`} alt="" />
+        <img src={post?.cover} alt="" />
       </div>
 
       <div
