@@ -5,15 +5,13 @@ import { getStorage } from 'firebase/storage'
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: 'AIzaSyAIe9e0AKlA37Pdg0EWPam_BTZ8YCzlEMs',
+// Initialize Firebase
+export const app = initializeApp({
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: 'simple-blog-app-storage.firebaseapp.com',
   projectId: 'simple-blog-app-storage',
-  storageBucket: 'simple-blog-app-storage.appspot.com',
-  messagingSenderId: '1051513319120',
-  appId: '1:1051513319120:web:4d7cdaca2e1051d34738d5',
-}
-
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig)
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+})
 export const storage = getStorage(app)

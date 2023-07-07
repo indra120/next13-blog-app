@@ -9,7 +9,9 @@ export const getPosts = cache(
 )
 
 export const getPost = cache(
-  async (id: string) => await db.post.findUnique({
-    where: { id },
-  })
+  async (id: string) => (
+    await db.post.findUnique({
+      where: { id },
+    })
+  )
 )

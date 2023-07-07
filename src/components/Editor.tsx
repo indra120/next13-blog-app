@@ -46,11 +46,10 @@ const Editor: React.FC<Props> = (props) => {
             router.push(`/post/${params.id}`)
           } else {
             const file = data.get('cover') as File
-            const storageRef = ref(
-              storage,
-              `images/${Date.now()}.${file.type.split('/')[1]}`
+            const uploadTask = uploadBytesResumable(
+              ref(storage, `images/${Date.now()}.${file.type.split('/')[1]}`),
+              file
             )
-            const uploadTask = uploadBytesResumable(storageRef, file)
 
             uploadTask.on(
               'state_changed',

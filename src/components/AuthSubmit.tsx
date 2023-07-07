@@ -6,13 +6,13 @@ import { register } from '@app/actions'
 
 const AuthSubmit = () => {
   const params = useSearchParams()
-  const pathname=usePathname()
+  const pathname = usePathname()
 
   return (
     <button
       type="submit"
       formAction={async (data) => {
-        if (pathname === 'register') {
+        if (pathname === '/register') {
           await register(data)
         }
 
@@ -23,7 +23,7 @@ const AuthSubmit = () => {
         })
       }}
     >
-      {pathname === 'register'? 'Register' : 'Login'}
+      {pathname === '/register' ? 'Register' : 'Login'}
     </button>
   )
 }
